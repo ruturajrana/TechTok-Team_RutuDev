@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Balthazar;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #loginForm {
+      text-align: center;
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #logo {
+      font-size: 150px;
+    }
+
+    #logo span {
+      color: black;
+    }
+
+    #logo span:nth-child(2),
+    #logo span:nth-child(4) {
+      color: red;
+    }
+
+    #tagline {
+      font-family: 'Times New Roman', serif;
+      color: black;
+    }
+
+    #loginBtn {
+      cursor: pointer;
+      color: white;
+      background-color: red;
+      padding: 10px 20px;
+      font-size: 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    #error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap">
+  <title>Login Page</title>
+</head>
+<body>
+
+<div id="loginForm">
+  <div id="logo">
+    <span>D</span>
+    <span style="font-size: 70px;">k</span>
+    <span>R</span>
+    <span style="font-size: 70px;">r</span>
+  </div>
+
+  <div id="tagline">
+    Innovative Tech Sharing Platform
+  </div>
+
+  <div style="height: 10px;"></div>
+
+  <form onsubmit="return validateLogin()" action="main1index.html" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <button type="submit" id="loginBtn">LOGIN</button>
+  </form>
+
+  <div id="error"></div>
+</div>
+
+<script>
+  function validateLogin() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+
+    if (username.toLowerCase() === 'dk_art110' && password === 'DK_ART110') {
+      // Valid credentials, allow redirection
+      return true;
+    } else {
+      // Invalid credentials, show error message and prevent redirection
+      document.getElementById('error').innerText = 'Incorrect or nonexisting username-password pair';
+      return false;
+    }
+  }
+</script>
+
+</body>
+</html>

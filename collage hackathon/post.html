@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+</head>
+<body style="background-color:#FFE699 ;">
+    <div style="text-align: center;">
+       <text style="font-size: 65px;color: black; font-family: Balthazar;">D</text>
+       <text style="font-size: 65px;color: red; font-family: Balthazar;">k</text>
+       <text style="font-size: 65px;color: black; font-family: Balthazar;">R</text>
+       <text style="font-size: 65px;color: red; font-family: Balthazar;">r</text></br>
+
+
+       <text style="font-size: 15px;color: black;"> TechTOK-Innovative Tech Sharing Platform</text></br>
+       <text style="font-size: 10px;color: black;"> Post page </text>
+    </div>
+
+
+<main>
+  <div class="upload-btn-wrapper">
+    <button class="btn" id="uploadBtn">Upload a Post</button>
+    <input type="file" name="myfile" id="fileInput" multiple />
+  </div>
+
+  <!-- Image Posts -->
+  <div class="post-container" id="postContainer"></div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmationModal"style="background-color: #DDE7DF; width: 100%;">
+    <div class="modal-content" style="background-color: #DDE7DF; width: 100%;">
+      <span class="close" id="closeModal">&times;</span>
+      <img src="" id="previewImage" alt="Post Preview" height="200px">
+      <textarea id="captionInput" placeholder="Write a caption..."height="200px"></textarea>
+      <button id="postButton"style="background-color: #000080; color: #fff; font-family: 'Times New Roman', serif; height: 25px; font-size: 20px;">Post</button>
+    </div>
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const uploadBtn = document.getElementById('uploadBtn');
+    const fileInput = document.getElementById('fileInput');
+    const postContainer = document.getElementById('postContainer');
+    const confirmationModal = document.getElementById('confirmationModal');
+    const closeModal = document.getElementById('closeModal');
+    const previewImage = document.getElementById('previewImage');
+    const captionInput = document.getElementById('captionInput');
+    const postButton = document.getElementById('postButton');
+
+    uploadBtn.addEventListener('click', function () {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function () {
+      const files = fileInput.files;
+      
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const imageUrl = e.target.result;
+          previewImage.src = imageUrl;
+          openConfirmationModal();
+        };
+
+        reader.readAsDataURL(file);
+      }
+
+
+      fileInput.value = null;
+    });
+
+    function openConfirmationModal() {
+      confirmationModal.style.display = 'block';
+    }
+
+    closeModal.addEventListener('click', function () {
+      confirmationModal.style.display = 'none';
+    });
+
+    postButton.addEventListener('click', function () {
+      const imageUrl = previewImage.src;
+      const caption = captionInput.value;
+
+      if (imageUrl && caption) {
+        createPost(imageUrl, caption);
+        closeConfirmationModal();
+      }
+    });
+
+    function closeConfirmationModal() {
+      confirmationModal.style.display = 'none';
+      previewImage.src = ''; 
+      captionInput.value = ''; 
+    }
+
+    function createPost(imageUrl, caption) {
+      const post = document.createElement('div');
+      post.className = 'post';
+      
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.alt = 'User Post';
+
+      const captionText = document.createElement('p');
+      captionText.innerText = caption;
+
+      const interactionIcons = document.createElement('div');
+      interactionIcons.className = 'interaction-icons';
+      interactionIcons.innerHTML = `
+        <span class="icon">❤️ 0</span>
+        <span class="icon">💬 0</span>
+        <span class="icon">🔄 0</span>
+      `;
+
+      post.appendChild(img);
+      post.appendChild(captionText);
+      post.appendChild(interactionIcons);
+      postContainer.appendChild(post);
+    }
+  });
+</script>
+
+</body>
+</html>

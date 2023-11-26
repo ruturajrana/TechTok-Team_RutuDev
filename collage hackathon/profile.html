@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    .profile-container {
+      background-color: white;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+</style>
+</head>
+<body style="background-color:#FFE699 ;">
+    <div style="text-align: center;">
+       <text style="font-size: 65px;color: black; font-family: Balthazar;">D</text>
+       <text style="font-size: 65px;color: red; font-family: Balthazar;">k</text>
+       <text style="font-size: 65px;color: black; font-family: Balthazar;">R</text>
+       <text style="font-size: 65px;color: red; font-family: Balthazar;">r</text></br>
+
+
+       <text style="font-size: 15px;color: black;"> TechTOK-Innovative Tech Sharing Platform</text></br>
+       <text style="font-size: 10px;color: black;"> Profile page </text>
+    </div>
+
+    <div class="profile-container" >
+
+        <table style="width: 90%; height: 200px;">
+
+            <tr>
+                <td rowspan="4" colspan="4" width="30%" style="text-align:center;"><img src="C:\xampp\htdocs\collage hackathon\image\Picture1.png" alt="logo" width="250px" height="250px" id="profilePhoto"></td>
+                <td colspan="4" style="font-size: 40PX;color: red; font-family: Times New Roman;"><b>@DK_ART110</b></td>
+            </tr>
+
+            <tr>
+                <td style="font-size:30px; color: black;text-align: center; font-family:Times New Roman;" width="23.3%"><b>6</b></td>
+                <td colspan="2" style="font-size:30px;color: black;text-align: center; font-family:Times New Roman;" width="23.3%"><b>637</b></td>
+                <td style="font-size:30px; color: black;text-align: center; font-family:Times New Roman;" width="23.3%"><b>562</b></td>
+            </tr>
+
+            <tr>
+                <td style="font-size:30px; color: black;text-align: center; font-family:Times New Roman;" width="23.3%"><b>Post</b></td>
+                <td colspan="2" style="font-size:30px; color: black;text-align: center; font-family:Times New Roman;" width="23.3%"><b>Followers</b></td>
+                <td style="font-size:30px; color: black;text-align: center; font-family:Times New Roman;" width="23.3%"><b>Following</b></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <button id="changeProfilePhotoButton" style="background-color: #000080; color: #fff; font-family: 'Times New Roman', serif; height: 25px; font-size: 20px;">Change Profile Photo</button>
+                </td>
+                <td colspan="2"><button id="shareprofile" onclick="window.location.href='file://C:/xampp/htdocs/collage hackathon/links/share.html'" style="background-color: #000080; color: #fff; font-family: 'Times New Roman', serif; height: 25px; font-size: 20px;">Share Profile</button></td>
+
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const changeProfilePhotoButton = document.getElementById('changeProfilePhotoButton');
+        const profilePhoto = document.getElementById('profilePhoto');
+
+           changeProfilePhotoButton.addEventListener('click', () => 
+    {
+        const newProfilePhoto = document.createElement('input');
+           newProfilePhoto.type = 'file';
+           newProfilePhoto.accept = 'image/png, image/jpeg';
+           newProfilePhoto.addEventListener('change', () => 
+           {
+              if (newProfilePhoto.files && newProfilePhoto.files[0]) 
+              {
+                const reader = new FileReader();
+                reader.onload = () => 
+                {
+                 profilePhoto.src = reader.result;
+                };
+
+                reader.readAsDataURL(newProfilePhoto.files[0]);
+              }
+          });
+
+        newProfilePhoto.click();
+    });
+
+    </script>
+
+
+    <div style="height:10px">
+        
+    </div>
+    <div style="background-color:white;">
+        <table width="100%">
+            <tr>
+                <td style="text-align:center"><img src="C:\xampp\htdocs\collage hackathon\image\pp1.jpg" alt="logo" width="300px"></td>
+                <td style="text-align:center"><img src="C:\xampp\htdocs\collage hackathon\image\pp2.jpg" alt="logo" width="300px"></td>
+                <td style="text-align:center"><img src="C:\xampp\htdocs\collage hackathon\image\pp3.jpg" alt="logo" width="300px"></td>
+            </tr>
+            <tr>
+                <td style="text-align:center"><img src="C:\xampp\htdocs\collage hackathon\image\pp4.jpg" alt="logo" width="300px"></td>
+                <td style="text-align:center"><img src="C:\xampp\htdocs\collage hackathon\image\pp5.jpg" alt="logo" width="300px"></td>
+                <td style="text-align:center"><img src="C:\xampp\htdocs\collage hackathon\image\pp6.jpg" alt="logo" width="300px"></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

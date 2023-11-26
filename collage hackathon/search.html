@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Detection Fun</title>
+</head>
+
+<body style="background-color:#FFE699 ;">
+    <div style="text-align: center;">
+       <text style="font-size: 65px;color: black; font-family: Balthazar;">D</text>
+       <text style="font-size: 65px;color: red; font-family: Balthazar;">k</text>
+       <text style="font-size: 65px;color: black; font-family: Balthazar;">R</text>
+       <text style="font-size: 65px;color: red; font-family: Balthazar;">r</text></br>
+
+
+       <text style="font-size: 15px;color: black;"> TechTOK-Innovative Tech Sharing Platform</text></br>
+       <text style="font-size: 10px;color: black;"> Search page </text>
+    </div>
+
+    <div style="background-color:white;">
+        <table width="100%">
+            <tr>
+                <td><img src="C:\xampp\htdocs\collage hackathon\image\picture2.png" height="40px"><b>DK_ART110</b></td>
+                <td align="right">|<img src="C:\xampp\htdocs\collage hackathon\image\s1.png" height="40px" id="mic-icon"></td>
+            </tr>
+        </table>
+
+        <script>
+          const recognition = new webkitSpeechRecognition();
+          recognition.continuous = false;
+          recognition.lang = 'en-US';
+
+          recognition.onresult = (event) => 
+          {
+           const result = event.results[0][0].transcript;
+           document.querySelector('b').innerText = result;
+          };
+
+        document.querySelector('#mic-icon').addEventListener('click', () => 
+        {
+         recognition.start();
+        });
+</script>
+
+    </div>
+    
+    <div style="height:10px">
+    </div>
+
+    <div>
+        <img src="C:\xampp\htdocs\collage hackathon\image\s4.png" width="100%">
+    </div>
+        
+</body>
+</html>

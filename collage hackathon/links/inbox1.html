@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Balthazar', cursive;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      text-align: center;
+      background-color: #333;
+      color: white;
+      padding: 10px;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .conversation {
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 60%;
+      background-color: #FEE699;
+      border-radius: 8px;
+    }
+
+    .message {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message-left {
+      align-self: flex-start;
+      background-color: #fff;
+    }
+
+    .message-right {
+      align-self: flex-end;
+      background-color: #f9f9f9;
+    }
+
+    .message .sender {
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .message span {
+      font-size: 18px;
+    }
+
+    .message-options {
+      display: none;
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      cursor: pointer;
+    }
+
+    .message:hover .message-options {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .option {
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .message-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    #messageInput {
+      flex-grow: 2;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    #sendMessageBtn {
+      margin-left: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap">
+</head>
+<body>
+
+<header>
+  <h1>DkRr</h1>
+</header>
+
+<main>
+  <div class="conversation" id="conversation">
+  </div>
+
+
+  <div class="message-input">
+    <input type="text" id="messageInput" placeholder="Type your message...">
+    <button id="sendMessageBtn">Send</button>
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const conversation = document.getElementById('conversation');
+    const messageInput = document.getElementById('messageInput');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+    sendMessageBtn.addEventListener('click', function () {
+      const messageText = messageInput.value;
+
+      if (messageText) {
+        createMessage('DK_ART110', messageText, true);
+        messageInput.value = ''; 
+        conversation.scrollTop = conversation.scrollHeight;
+      }
+    });
+
+    function createMessage(sender, text, isLeft) {
+      const message = document.createElement('div');
+      message.className = 'message';
+      message.classList.add(isLeft ? 'message-left' : 'message-right');
+
+      const senderSpan = document.createElement('span');
+      senderSpan.className = 'sender';
+      senderSpan.innerText = sender + ':';
+
+      const textSpan = document.createElement('span');
+      textSpan.innerText = text;
+
+      const optionsDiv = document.createElement('div');
+      optionsDiv.className = 'message-options';
+
+      const optionsBtn = document.createElement('div');
+      optionsBtn.innerText = '...';
+      optionsBtn.className = 'option';
+      optionsBtn.addEventListener('click', function () {
+        toggleOptions(optionsDiv);
+      });
+
+      const editBtn = document.createElement('div');
+      editBtn.innerText = 'Edit';
+      editBtn.className = 'option';
+      editBtn.addEventListener('click', function () {
+        editMessage(textSpan, messageText => {
+          textSpan.innerText = messageText;
+        });
+      });
+
+      const deleteBtn = document.createElement('div');
+      deleteBtn.innerText = 'Delete';
+      deleteBtn.className = 'option';
+      deleteBtn.addEventListener('click', function () {
+        deleteMessage(message);
+      });
+
+      optionsDiv.appendChild(optionsBtn);
+      optionsDiv.appendChild(editBtn);
+      optionsDiv.appendChild(deleteBtn);
+
+      message.appendChild(senderSpan);
+      message.appendChild(textSpan);
+      message.appendChild(optionsDiv);
+      conversation.appendChild(message);
+    }
+
+    function toggleOptions(optionsDiv) {
+      optionsDiv.style.display = optionsDiv.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    function editMessage(textElement, callback) {
+      const newText = prompt('Edit your message:', textElement.innerText);
+      if (newText !== null) {
+        callback(newText);
+      }
+    }
+
+    function deleteMessage(messageElement) {
+      const confirmDelete = confirm('Are you sure you want to delete this message?');
+      if (confirmDelete) {
+        conversation.removeChild(messageElement);
+      }
+    }
+
+    createMessage('DK_ART110', 'Hey, did you hear about the new JavaScript framework?', true);
+    createMessage('dk_art93', 'Yeah, I heard! They say it\'s so fast it wrote itself a love letter.', false);
+    createMessage('DK_ART110', 'Haha, good one! Remember that time you wrote a loop that went rogue?', true);
+    createMessage('RUTURAJ_123R ', 'Don\'t remind me. My computer still sends me error messages in my nightmares.', false);
+  });
+</script>
+
+</body>
+</html>
