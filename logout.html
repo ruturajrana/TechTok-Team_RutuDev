@@ -24,9 +24,6 @@
 </head>
 <body>
 
-    <!-- Your application content goes here -->
-
-    <!-- Logout button -->
     <div>
         <h1 align="center">Do you Want LOG-OUT From From Your Profile??</h1>
     </div>
@@ -34,14 +31,14 @@
 
     <script>
         document.getElementById('logoutBtn').addEventListener('click', function() {
-            // Perform logout actions here, such as clearing user session or redirecting to index  page
+    
             console.log('User logged out');
             
-            // Break out of the iframe
+        
             if (window.top !== window.self) {
                 window.top.location.href = 'file:///C:/xampp/htdocs/collage%20hackathon/index.html';
             } else {
-                // Example: Redirect to the index page
+            
                 window.location.href = 'file:///C:/xampp/htdocs/collage%20hackathon/index.html';
             }
         });
